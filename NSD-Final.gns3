@@ -21,37 +21,145 @@
                 "drawing_id": "7a0085b5-846a-416b-9386-6d10b9ea128c",
                 "locked": false,
                 "rotation": 0,
-                "svg": "<svg width=\"323\" height=\"364\"><rect width=\"323\" height=\"364\" fill=\"#ffffff\" fill-opacity=\"1.0\" stroke-width=\"2\" stroke=\"#000000\" /></svg>",
-                "x": -812,
-                "y": -362,
+                "svg": "<svg width=\"323\" height=\"364\"><rect width=\"323\" height=\"364\" fill=\"#ffff7f\" fill-opacity=\"1.0\" stroke-width=\"2\" stroke=\"#000000\" /></svg>",
+                "x": -1017,
+                "y": -432,
                 "z": 0
             },
             {
                 "drawing_id": "af318c4a-0e4e-4660-9b52-64b276c0631d",
-                "locked": false,
+                "locked": true,
                 "rotation": 0,
-                "svg": "<svg width=\"685.7669725251866\" height=\"484.3563351861397\"><ellipse cx=\"342\" rx=\"343\" cy=\"242\" ry=\"243\" fill=\"#ffffff\" fill-opacity=\"1.0\" stroke-width=\"2\" stroke=\"#000000\" /></svg>",
-                "x": -401,
-                "y": -454,
+                "svg": "<svg width=\"819.4368670764584\" height=\"600.812408671319\"><ellipse cx=\"409\" rx=\"410\" cy=\"300\" ry=\"301\" fill=\"#ffffff\" fill-opacity=\"1.0\" stroke-width=\"2\" stroke=\"#000000\" /></svg>",
+                "x": -496,
+                "y": -486,
                 "z": 0
             },
             {
                 "drawing_id": "27e5672d-53d9-445c-a37a-86f5b7426b4b",
                 "locked": false,
                 "rotation": 0,
-                "svg": "<svg width=\"265\" height=\"356\"><rect width=\"265\" height=\"356\" fill=\"#ffffff\" fill-opacity=\"1.0\" stroke-width=\"2\" stroke=\"#000000\" /></svg>",
-                "x": -188,
-                "y": 78,
+                "svg": "<svg width=\"401\" height=\"356\"><rect width=\"401\" height=\"356\" fill=\"#ffff7f\" fill-opacity=\"1.0\" stroke-width=\"2\" stroke=\"#000000\" /></svg>",
+                "x": -211,
+                "y": 201,
                 "z": 0
             },
             {
                 "drawing_id": "ecd48447-3e65-4ede-b102-8e40a9dfbc76",
                 "locked": false,
                 "rotation": 0,
-                "svg": "<svg width=\"629\" height=\"350\"><rect width=\"629\" height=\"350\" fill=\"#ffffff\" fill-opacity=\"1.0\" stroke-width=\"2\" stroke=\"#000000\" /></svg>",
-                "x": 351,
-                "y": -286,
+                "svg": "<svg width=\"673\" height=\"350\"><rect width=\"673\" height=\"350\" fill=\"#ffff7f\" fill-opacity=\"1.0\" stroke-width=\"2\" stroke=\"#000000\" /></svg>",
+                "x": 488,
+                "y": -383,
                 "z": 0
+            },
+            {
+                "drawing_id": "5f9c3447-6ac2-432a-a280-2bce35343ef2",
+                "locked": false,
+                "rotation": 0,
+                "svg": "<svg width=\"200\" height=\"56\"><text font-family=\"TypeWriter\" font-size=\"10.0\" font-weight=\"bold\" fill=\"#000000\" fill-opacity=\"1.0\">VPN Site 1 (Spoke)\n 192.168.0.1/24</text></svg>",
+                "x": -1009,
+                "y": -426,
+                "z": 2
+            },
+            {
+                "drawing_id": "faeddbaf-0122-4415-8b91-d78f75f02441",
+                "locked": false,
+                "rotation": 0,
+                "svg": "<svg width=\"179\" height=\"56\"><text font-family=\"TypeWriter\" font-size=\"10.0\" font-weight=\"bold\" fill=\"#000000\" fill-opacity=\"1.0\">VPN Site 3 (Hub)\n 192.168.2.1/24</text></svg>",
+                "x": 3,
+                "y": 205,
+                "z": 2
+            },
+            {
+                "drawing_id": "9f0cbd27-5c8c-4683-9fc8-8545d533632f",
+                "locked": false,
+                "rotation": 0,
+                "svg": "<svg width=\"200\" height=\"56\"><text font-family=\"TypeWriter\" font-size=\"10.0\" font-weight=\"bold\" fill=\"#000000\" fill-opacity=\"1.0\">VPN Site 2 (Spoke)\n 192.168.1.1/24</text></svg>",
+                "x": 922,
+                "y": -372,
+                "z": 2
+            },
+            {
+                "drawing_id": "c3b0d165-8b51-4fbc-b9bf-c918587106ae",
+                "locked": false,
+                "rotation": 0,
+                "svg": "<svg width=\"129\" height=\"32\"><text font-family=\"TypeWriter\" font-size=\"10.0\" font-weight=\"bold\" fill=\"#ff0000\" fill-opacity=\"1.0\">10.1.1.0/30</text></svg>",
+                "x": -627,
+                "y": -347,
+                "z": 2
+            },
+            {
+                "drawing_id": "6e6cffb7-6155-4043-a76f-dcb5c8e3f776",
+                "locked": false,
+                "rotation": 0,
+                "svg": "<svg width=\"129\" height=\"32\"><text font-family=\"TypeWriter\" font-size=\"10.0\" font-weight=\"bold\" fill=\"#ff0000\" fill-opacity=\"1.0\">10.1.2.0/30</text></svg>",
+                "x": 310,
+                "y": -349,
+                "z": 2
+            },
+            {
+                "drawing_id": "7c3bc8a8-24aa-420a-806e-4023fee6daab",
+                "locked": false,
+                "rotation": 0,
+                "svg": "<svg width=\"129\" height=\"32\"><text font-family=\"TypeWriter\" font-size=\"10.0\" font-weight=\"bold\" fill=\"#ff0000\" fill-opacity=\"1.0\">10.1.3.0/30</text></svg>",
+                "x": -62,
+                "y": 132,
+                "z": 2
+            },
+            {
+                "drawing_id": "be554783-036a-4556-8800-36a15ec1965c",
+                "locked": false,
+                "rotation": 0,
+                "svg": "<svg width=\"27\" height=\"32\"><text font-family=\"TypeWriter\" font-size=\"10.0\" font-weight=\"bold\" fill=\"#ff0000\" fill-opacity=\"1.0\">.2</text></svg>",
+                "x": -755,
+                "y": -346,
+                "z": 2
+            },
+            {
+                "drawing_id": "e7ad5f88-1710-48fe-b620-960eebc041bb",
+                "locked": false,
+                "rotation": 0,
+                "svg": "<svg width=\"27\" height=\"32\"><text font-family=\"TypeWriter\" font-size=\"10.0\" font-weight=\"bold\" fill=\"#ff0000\" fill-opacity=\"1.0\">.1</text></svg>",
+                "x": -444,
+                "y": -349,
+                "z": 2
+            },
+            {
+                "drawing_id": "d4b6b567-b3a4-468f-853c-1df7421b9a67",
+                "locked": false,
+                "rotation": 0,
+                "svg": "<svg width=\"27\" height=\"32\"><text font-family=\"TypeWriter\" font-size=\"10.0\" font-weight=\"bold\" fill=\"#ff0000\" fill-opacity=\"1.0\">.2</text></svg>",
+                "x": 509,
+                "y": -354,
+                "z": 2
+            },
+            {
+                "drawing_id": "da87f3b1-bf38-41a8-a412-17b8990f9585",
+                "locked": false,
+                "rotation": 0,
+                "svg": "<svg width=\"27\" height=\"32\"><text font-family=\"TypeWriter\" font-size=\"10.0\" font-weight=\"bold\" fill=\"#ff0000\" fill-opacity=\"1.0\">.1</text></svg>",
+                "x": 233,
+                "y": -352,
+                "z": 2
+            },
+            {
+                "drawing_id": "c118f296-afe0-4e70-9486-e65aa4bfd06b",
+                "locked": false,
+                "rotation": 0,
+                "svg": "<svg width=\"27\" height=\"32\"><text font-family=\"TypeWriter\" font-size=\"10.0\" font-weight=\"bold\" fill=\"#ff0000\" fill-opacity=\"1.0\">.1</text></svg>",
+                "x": -96,
+                "y": 66,
+                "z": 2
+            },
+            {
+                "drawing_id": "b498807d-95d0-4d1c-9d89-e557f7ca1f26",
+                "locked": false,
+                "rotation": 0,
+                "svg": "<svg width=\"27\" height=\"32\"><text font-family=\"TypeWriter\" font-size=\"10.0\" font-weight=\"bold\" fill=\"#ff0000\" fill-opacity=\"1.0\">.2</text></svg>",
+                "x": -96,
+                "y": 254,
+                "z": 2
             }
         ],
         "links": [
@@ -78,8 +186,8 @@
                             "rotation": 0,
                             "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
                             "text": "eth0",
-                            "x": -44,
-                            "y": 48
+                            "x": -48,
+                            "y": 36
                         },
                         "node_id": "3bbd7546-5757-445b-9876-613ae23f898c",
                         "port_number": 0
@@ -98,8 +206,8 @@
                             "rotation": 0,
                             "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
                             "text": "eth1",
-                            "x": 69,
-                            "y": 30
+                            "x": 74,
+                            "y": 22
                         },
                         "node_id": "3bbd7546-5757-445b-9876-613ae23f898c",
                         "port_number": 0
@@ -110,8 +218,8 @@
                             "rotation": 0,
                             "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
                             "text": "eth1",
-                            "x": -54,
-                            "y": 34
+                            "x": -57,
+                            "y": 12
                         },
                         "node_id": "5448e798-131b-4c90-84f7-efefe456db63",
                         "port_number": 0
@@ -130,8 +238,8 @@
                             "rotation": 0,
                             "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
                             "text": "eth2",
-                            "x": 69,
-                            "y": 30
+                            "x": 65,
+                            "y": 16
                         },
                         "node_id": "5448e798-131b-4c90-84f7-efefe456db63",
                         "port_number": 0
@@ -142,8 +250,8 @@
                             "rotation": 0,
                             "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
                             "text": "eth2",
-                            "x": -53,
-                            "y": 30
+                            "x": -33,
+                            "y": 56
                         },
                         "node_id": "a6b0e456-e6f9-4682-b530-a7d6fcd397f0",
                         "port_number": 0
@@ -162,8 +270,8 @@
                             "rotation": 0,
                             "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
                             "text": "eth3",
-                            "x": 31,
-                            "y": 69
+                            "x": 38,
+                            "y": 59
                         },
                         "node_id": "5448e798-131b-4c90-84f7-efefe456db63",
                         "port_number": 0
@@ -174,8 +282,8 @@
                             "rotation": 0,
                             "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
                             "text": "eth3",
-                            "x": 33,
-                            "y": -24
+                            "x": 38,
+                            "y": -33
                         },
                         "node_id": "07560623-8357-4b78-be7a-00e2818aaef5",
                         "port_number": 0
@@ -206,8 +314,8 @@
                             "rotation": 0,
                             "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
                             "text": "eth0",
-                            "x": 30,
-                            "y": 70
+                            "x": 37,
+                            "y": 58
                         },
                         "node_id": "07560623-8357-4b78-be7a-00e2818aaef5",
                         "port_number": 0
@@ -226,8 +334,8 @@
                             "rotation": 0,
                             "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
                             "text": "eth0",
-                            "x": 69,
-                            "y": 30
+                            "x": 54,
+                            "y": 34
                         },
                         "node_id": "a6b0e456-e6f9-4682-b530-a7d6fcd397f0",
                         "port_number": 0
@@ -386,8 +494,8 @@
                             "rotation": 0,
                             "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
                             "text": "eth0",
-                            "x": 34,
-                            "y": -24
+                            "x": 41,
+                            "y": -28
                         },
                         "node_id": "aaa343f0-cbd5-454e-aa6d-d5a0b95e51f5",
                         "port_number": 0
@@ -398,8 +506,8 @@
                             "rotation": 0,
                             "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
                             "text": "eth1",
-                            "x": 32,
-                            "y": 69
+                            "x": 39,
+                            "y": 56
                         },
                         "node_id": "adf31816-0f17-4360-b091-e5997668a7bb",
                         "port_number": 0
@@ -436,7 +544,7 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "96694adad655e65e80fa9c3c75534afcdb4627b21fca21c7301bbcb15d95bed6",
+                    "container_id": "1340408ff3af9fbe035e191178eef8cebf4ca2c0da8ae9769ec68dccfb35924b",
                     "environment": null,
                     "extra_hosts": null,
                     "extra_volumes": [],
@@ -448,8 +556,8 @@
                 "symbol": ":/symbols/affinity/circle/blue/router.svg",
                 "template_id": "7b27c6fc-6daa-4d39-a660-a0c4f2c25266",
                 "width": 60,
-                "x": -613,
-                "y": -271,
+                "x": -818,
+                "y": -341,
                 "z": 1
             },
             {
@@ -479,7 +587,7 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "41670fe652b627416a8fef53cc686557d8970ed3bae5f1cc775266abf5350a0e",
+                    "container_id": "d9560c192f6988bde44abbf85cddfa174b781a605e0db3b5c3e725922dc853c2",
                     "environment": null,
                     "extra_hosts": null,
                     "extra_volumes": [],
@@ -491,8 +599,8 @@
                 "symbol": ":/symbols/affinity/circle/red/router2.svg",
                 "template_id": "fc163ad8-0891-4431-882b-a61ac70f407b",
                 "width": 60,
-                "x": -343,
-                "y": -272,
+                "x": -420,
+                "y": -343,
                 "z": 1
             },
             {
@@ -507,8 +615,8 @@
                     "rotation": 0,
                     "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
                     "text": "R104",
-                    "x": -1,
-                    "y": -25
+                    "x": 0,
+                    "y": -54
                 },
                 "locked": false,
                 "name": "R104",
@@ -522,7 +630,7 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "77932faf6c1b3a9147029a96d37c8015d975114871a61634f4686a8a2cb1c5f8",
+                    "container_id": "9bc05a83161c69cce942568b43143c8be79095c67c4c13b1c31ff47ba5353315",
                     "environment": null,
                     "extra_hosts": null,
                     "extra_volumes": [],
@@ -534,8 +642,8 @@
                 "symbol": ":/symbols/affinity/circle/red/router2.svg",
                 "template_id": "fc163ad8-0891-4431-882b-a61ac70f407b",
                 "width": 60,
-                "x": -90,
-                "y": -268,
+                "x": -92,
+                "y": -245,
                 "z": 1
             },
             {
@@ -565,7 +673,7 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "abc818fb18aaf185bc2605e7f6dae79e02a3dd8820277ea761857318f3dca5db",
+                    "container_id": "3c072170358957cd57d904c39cc526190c7660b0da24d827644df299462697d7",
                     "environment": null,
                     "extra_hosts": null,
                     "extra_volumes": [],
@@ -577,8 +685,8 @@
                 "symbol": ":/symbols/affinity/circle/red/router2.svg",
                 "template_id": "fc163ad8-0891-4431-882b-a61ac70f407b",
                 "width": 60,
-                "x": 175,
-                "y": -265,
+                "x": 169,
+                "y": -349,
                 "z": 1
             },
             {
@@ -593,8 +701,8 @@
                     "rotation": 0,
                     "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
                     "text": "R102",
-                    "x": -63,
-                    "y": 14
+                    "x": -64,
+                    "y": 12
                 },
                 "locked": false,
                 "name": "R102",
@@ -608,7 +716,7 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "04d017975dd240366d3f35d279bdb98adb1ad2689b2b504c91fc0800a5d60ed4",
+                    "container_id": "60bbb54bf7888f91f7c3db52a5c3e089d09e9516e2d4f0eca6d6f9e8b98452c6",
                     "environment": null,
                     "extra_hosts": null,
                     "extra_volumes": [],
@@ -621,7 +729,7 @@
                 "template_id": "fc163ad8-0891-4431-882b-a61ac70f407b",
                 "width": 60,
                 "x": -93,
-                "y": -77,
+                "y": 9,
                 "z": 1
             },
             {
@@ -651,7 +759,7 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "b918aa65f68d7bfb0448706e5f56f37ff2cd1659e746cc1c2e67731eaa02f7fb",
+                    "container_id": "cee91d3222627f5d3c5b1eb4a9950dc633f0daad68f7d45da4303c6d1efc863a",
                     "environment": null,
                     "extra_hosts": null,
                     "extra_volumes": [],
@@ -663,8 +771,8 @@
                 "symbol": ":/symbols/affinity/circle/blue/router.svg",
                 "template_id": "7b27c6fc-6daa-4d39-a660-a0c4f2c25266",
                 "width": 60,
-                "x": -97,
-                "y": 119,
+                "x": -94,
+                "y": 283,
                 "z": 1
             },
             {
@@ -694,7 +802,7 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "47bb17b7ac0e97c8f3339e789219f078b3ebdb2a0ab8784d77e747e4eee9adbb",
+                    "container_id": "5f2a0121aa943286db3de8c8283699909ed5dfb3a500baec99fa8485e968cadb",
                     "environment": null,
                     "extra_hosts": null,
                     "extra_volumes": [],
@@ -706,8 +814,8 @@
                 "symbol": ":/symbols/affinity/circle/blue/router.svg",
                 "template_id": "7b27c6fc-6daa-4d39-a660-a0c4f2c25266",
                 "width": 60,
-                "x": 401,
-                "y": -263,
+                "x": 544,
+                "y": -350,
                 "z": 1
             },
             {
@@ -737,7 +845,7 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "cf448de4952706dc4c4fca11e77245e1d3088b7d296cfec456ad769798892943",
+                    "container_id": "181c83b2e02342c08f958c563fa58df271eb74dd25d47f0fdab1127148e7f427",
                     "environment": null,
                     "extra_hosts": null,
                     "extra_volumes": [],
@@ -749,8 +857,8 @@
                 "symbol": ":/symbols/affinity/circle/green/client.svg",
                 "template_id": "7fd540da-9ad4-4783-98b3-c8a76c723e02",
                 "width": 60,
-                "x": -700,
-                "y": -108,
+                "x": -905,
+                "y": -178,
                 "z": 1
             },
             {
@@ -780,7 +888,7 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "b524ee140034df9f199f34ff9bf258f83734842e79764e4b27bd096d6700aaa9",
+                    "container_id": "6fe7c7e763b319109f3a51b4deac42ef8ce0200763f1da33e2044b76cda630f4",
                     "environment": null,
                     "extra_hosts": null,
                     "extra_volumes": [],
@@ -792,8 +900,8 @@
                 "symbol": ":/symbols/affinity/circle/blue/switch.svg",
                 "template_id": "7baf9635-4f5e-4e68-8b0b-ca6d53d4811e",
                 "width": 60,
-                "x": 663,
-                "y": -260,
+                "x": 806,
+                "y": -347,
                 "z": 1
             },
             {
@@ -823,7 +931,7 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "7836a25ac012a707f7bcafda92809defb335f192b81b85c0a761344ee49b3d23",
+                    "container_id": "8012977f34f3f4d15963c64bb29ab7eda0b4717c4222edca98bba8edc93a309c",
                     "environment": null,
                     "extra_hosts": null,
                     "extra_volumes": [],
@@ -835,8 +943,8 @@
                 "symbol": ":/symbols/affinity/circle/green/client.svg",
                 "template_id": "7fd540da-9ad4-4783-98b3-c8a76c723e02",
                 "width": 60,
-                "x": 552,
-                "y": -65,
+                "x": 695,
+                "y": -152,
                 "z": 1
             },
             {
@@ -866,7 +974,7 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "decc5b5f4b9d920cabca555496f336a8f61e2f4ef62bcb3d99e186f35b3e2dce",
+                    "container_id": "04feae050d0160e6fc8b59a91a080c04121ebd52bb2820c0d788ce70e2cfa3b5",
                     "environment": null,
                     "extra_hosts": null,
                     "extra_volumes": [],
@@ -878,8 +986,8 @@
                 "symbol": ":/symbols/affinity/circle/green/client.svg",
                 "template_id": "7fd540da-9ad4-4783-98b3-c8a76c723e02",
                 "width": 60,
-                "x": 780,
-                "y": -61,
+                "x": 923,
+                "y": -148,
                 "z": 1
             },
             {
@@ -909,7 +1017,7 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "fdd95434169604d2e0a90a4dcef1c88872421f1a579c5ae4f3326590c36619bf",
+                    "container_id": "c546737c96a9fae453c8455b76fd04eb0fcd949eb20ec1da03380e9fab1be4e5",
                     "environment": null,
                     "extra_hosts": null,
                     "extra_volumes": [],
@@ -921,8 +1029,8 @@
                 "symbol": ":/symbols/affinity/square/gray/server.svg",
                 "template_id": "eed29326-00bb-4a56-a607-cf9781a97646",
                 "width": 60,
-                "x": -86,
-                "y": 301,
+                "x": -90,
+                "y": 473,
                 "z": 1
             }
         ]
