@@ -331,6 +331,15 @@
                 "x": 939,
                 "y": -86,
                 "z": 2
+            },
+            {
+                "drawing_id": "356925cf-3db5-4892-b5a7-3f676b2d92d1",
+                "locked": false,
+                "rotation": 0,
+                "svg": "<svg width=\"80\" height=\"32\"><text font-family=\"TypeWriter\" font-size=\"10.0\" font-weight=\"bold\" fill=\"#000000\" fill-opacity=\"1.0\">AS 100</text></svg>",
+                "x": -119,
+                "y": -475,
+                "z": 2
             }
         ],
         "links": [
@@ -715,15 +724,15 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "dd8cb731060e43d9b849a634fc7896ce404ae4f87c2f8e83e7be83e017727636",
+                    "container_id": "0a55f8b1f7353b40ee7db7d34e6a1d10200de2d0efc26ada8fdebb58ce3e2dc7",
                     "environment": "",
                     "extra_hosts": "",
                     "extra_volumes": [
-                        "/"
+                        "/root"
                     ],
                     "image": "nsdcourse/basenet:latest",
                     "mac_address": "02:42:22:e4:cf:00",
-                    "start_command": null,
+                    "start_command": "/root/init.sh",
                     "usage": ""
                 },
                 "symbol": ":/symbols/affinity/circle/blue/router.svg",
@@ -760,7 +769,7 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "a94e00c6bebacdbc7fdc23d9dd6eb3f56d8a110738a3fb3252a7cb08e7451859",
+                    "container_id": "b7bf1b06eaec93c94305db3581e18ab6b35a37944540b2636b63af95ba418740",
                     "environment": null,
                     "extra_hosts": null,
                     "extra_volumes": [],
@@ -803,7 +812,7 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "85500311f51fe6f4e2805f540885705d45248b862e8b891b048c0b710a43732a",
+                    "container_id": "dc8ed9ad70f420f268a163bb9106e981494b83ad07c18a7504e2f8bbdc2d74bc",
                     "environment": null,
                     "extra_hosts": null,
                     "extra_volumes": [],
@@ -846,7 +855,7 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "ee5d63ffd553a02d253529514fa8735cc9293f988f8d5a4afd074d4df405400c",
+                    "container_id": "012997d24ad92cd5e809efbf3223c669011c5b48f5904093dd9b172b8b5c8701",
                     "environment": null,
                     "extra_hosts": null,
                     "extra_volumes": [],
@@ -889,7 +898,7 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "cacfbf3dabfce32cdc49ed10da5601bfa02206f25f2a2c88d49fb79e54ddf432",
+                    "container_id": "572dcf8125b039a318dcce7096fbb9c7f244911ebb73bbcc7896c9f27f7941f1",
                     "environment": null,
                     "extra_hosts": null,
                     "extra_volumes": [],
@@ -932,11 +941,11 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "2165c350f7a582ab28f7c8a1aa22543e045f4b27ab09066b8e1204d16fb15b2b",
+                    "container_id": "3b47d3049a21ad19dd2f1e35fa5d82b10e1af01d4f8a7c827b78f39db52f1148",
                     "environment": "",
                     "extra_hosts": "",
                     "extra_volumes": [
-                        "/"
+                        "/root"
                     ],
                     "image": "nsdcourse/basenet:latest",
                     "mac_address": "02:42:f3:18:16:00",
@@ -977,11 +986,11 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "2e9a5d03146f97946338dc4d854b403defaa264fd277478ce34e27d306f97a1e",
+                    "container_id": "44d8d58451b330eecb57c6e2f4115c1bedd291481e9f02fb706ffaa0d0bf4706",
                     "environment": "",
                     "extra_hosts": "",
                     "extra_volumes": [
-                        "/"
+                        "/root"
                     ],
                     "image": "nsdcourse/basenet:latest",
                     "mac_address": "02:42:72:c7:03:00",
@@ -1022,13 +1031,15 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "f61a50316e1fc6d8b609d13ffa3347b8ef236bc6f0a1daad07af78087e42d597",
-                    "environment": null,
-                    "extra_hosts": null,
-                    "extra_volumes": [],
+                    "container_id": "d524b80bbb3dc49672e936ba061fb51e97fe2a408ee083dde30d4bf89dd97e40",
+                    "environment": "",
+                    "extra_hosts": "",
+                    "extra_volumes": [
+                        "/root"
+                    ],
                     "image": "nsdcourse/basenet:latest",
                     "mac_address": "02:42:60:ac:48:00",
-                    "start_command": null,
+                    "start_command": "/root/init.sh",
                     "usage": ""
                 },
                 "symbol": ":/symbols/affinity/circle/green/client.svg",
@@ -1065,7 +1076,7 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "1a32878ee08d89ade1f32db4f6901c6e6347be1bf75265f1e6b327710a9a35ec",
+                    "container_id": "79909bf048a424af90d40f5412af93b7112727648bd89277342f5f11cff6be47",
                     "environment": null,
                     "extra_hosts": null,
                     "extra_volumes": [],
@@ -1108,10 +1119,12 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "2c3e2163d69f054135acd7887b93db39dcc7852780d67477c4a9f9258689e1fb",
-                    "environment": null,
-                    "extra_hosts": null,
-                    "extra_volumes": [],
+                    "container_id": "8f6744f5752a6b48ecb54708a412681d888b71dc7e577f856d88409a5b164845",
+                    "environment": "",
+                    "extra_hosts": "",
+                    "extra_volumes": [
+                        "/root"
+                    ],
                     "image": "nsdcourse/basenet:latest",
                     "mac_address": "02:42:8f:d7:0c:00",
                     "start_command": null,
@@ -1151,10 +1164,12 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "a595a73c0ad25dbdb378b606e6656643fa0b247aeef8df4d57251ce78dec4bac",
-                    "environment": null,
-                    "extra_hosts": null,
-                    "extra_volumes": [],
+                    "container_id": "f1915aad19cf3610769819ed02d62581fc34f318aad194e53b76c3de5822fc95",
+                    "environment": "",
+                    "extra_hosts": "",
+                    "extra_volumes": [
+                        "/root"
+                    ],
                     "image": "nsdcourse/basenet:latest",
                     "mac_address": "02:42:be:b4:61:00",
                     "start_command": null,
@@ -1194,7 +1209,7 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "4da2bc5f6b6593c0e099934bf77af7556f0db5e4323494ed1785e30a2ab6913e",
+                    "container_id": "6d8013f3be881c88f439251cf5e13eadc4f677bf76d69e8a7901a94e8236f01a",
                     "environment": null,
                     "extra_hosts": null,
                     "extra_volumes": [],
@@ -1215,5 +1230,5 @@
     "type": "topology",
     "variables": [],
     "version": "2.2.52",
-    "zoom": 71
+    "zoom": 84
 }
