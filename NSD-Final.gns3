@@ -941,7 +941,7 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "3b47d3049a21ad19dd2f1e35fa5d82b10e1af01d4f8a7c827b78f39db52f1148",
+                    "container_id": "7cdc220f69b0aca436560577c9ccda4ad0b0226196f063f49dd559defa597aa1",
                     "environment": "",
                     "extra_hosts": "",
                     "extra_volumes": [
@@ -949,7 +949,7 @@
                     ],
                     "image": "nsdcourse/basenet:latest",
                     "mac_address": "02:42:f3:18:16:00",
-                    "start_command": null,
+                    "start_command": "/root/init.sh",
                     "usage": ""
                 },
                 "symbol": ":/symbols/affinity/circle/blue/router.svg",
@@ -986,7 +986,7 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "44d8d58451b330eecb57c6e2f4115c1bedd291481e9f02fb706ffaa0d0bf4706",
+                    "container_id": "3872f15b31a6742b4e0a60b0d7735c3ba3ad3b75280f106dfbec28c300d63ade",
                     "environment": "",
                     "extra_hosts": "",
                     "extra_volumes": [
@@ -994,7 +994,7 @@
                     ],
                     "image": "nsdcourse/basenet:latest",
                     "mac_address": "02:42:72:c7:03:00",
-                    "start_command": null,
+                    "start_command": "/root/init.sh",
                     "usage": ""
                 },
                 "symbol": ":/symbols/affinity/circle/blue/router.svg",
