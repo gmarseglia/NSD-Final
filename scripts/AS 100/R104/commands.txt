@@ -18,5 +18,18 @@ router ospf
     network 10.0.11.0/30 area 0
     network 10.0.11.4/30 area 0
     network 10.0.11.8/30 area 0
+    exit
+!
+mpls ldp
+    router-id 10.0.0.104
+    ordered-control
+    address-family ipv4
+        discovery transport-address 10.0.0.104
+        interface eth1
+        interface eth2
+        interface eth3
+        interface lo
+        exit-address-family
+    exit
 !
 end

@@ -13,5 +13,16 @@ router ospf
     router-id 5.170.0.102
     network 5.170.0.102/32 area 0
     network 10.0.11.4/30 area 0
+    exit
+!
+mpls ldp
+    router-id 5.170.0.102
+    ordered-control
+    address-family ipv4
+        discovery transport-address 5.170.0.102
+        interface eth2
+        interface lo
+        exit-address-family
+    exit
 !
 end
