@@ -100,7 +100,7 @@
             },
             {
                 "drawing_id": "ba651090-6aaf-484e-a878-936525e58961",
-                "locked": true,
+                "locked": false,
                 "rotation": 0,
                 "svg": "<svg width=\"129\" height=\"32\"><text font-family=\"TypeWriter\" font-size=\"10.0\" font-weight=\"bold\" fill=\"#ff0000\" fill-opacity=\"1.0\">10.1.3.0/30</text></svg>",
                 "x": -62,
@@ -238,7 +238,7 @@
                 "locked": false,
                 "rotation": 0,
                 "svg": "<svg width=\"40\" height=\"32\"><text font-family=\"TypeWriter\" font-size=\"10.0\" font-weight=\"bold\" fill=\"#ff0000\" fill-opacity=\"1.0\">.10</text></svg>",
-                "x": -106,
+                "x": -107,
                 "y": -24,
                 "z": 2
             },
@@ -321,6 +321,42 @@
                 "svg": "<svg width=\"80\" height=\"32\"><text font-family=\"TypeWriter\" font-size=\"10.0\" font-weight=\"bold\" fill=\"#000000\" fill-opacity=\"1.0\">AS 100</text></svg>",
                 "x": -119,
                 "y": -475,
+                "z": 2
+            },
+            {
+                "drawing_id": "3f709aa0-3505-4d60-a678-e14c6db91916",
+                "locked": false,
+                "rotation": 0,
+                "svg": "<svg width=\"78\" height=\"32\"><text font-family=\"TypeWriter\" font-size=\"10.0\" font-weight=\"bold\" fill=\"#000000\" fill-opacity=\"1.0\">1.1.1.1</text></svg>",
+                "x": -391,
+                "y": -393,
+                "z": 2
+            },
+            {
+                "drawing_id": "2e6fb959-a2bd-4a8d-af67-d9cb82767f1c",
+                "locked": false,
+                "rotation": 0,
+                "svg": "<svg width=\"78\" height=\"32\"><text font-family=\"TypeWriter\" font-size=\"10.0\" font-weight=\"bold\" fill=\"#000000\" fill-opacity=\"1.0\">3.3.3.3</text></svg>",
+                "x": -170,
+                "y": 42,
+                "z": 2
+            },
+            {
+                "drawing_id": "1f9a8ff4-a1b1-475b-8a22-92505a60cfb2",
+                "locked": false,
+                "rotation": 0,
+                "svg": "<svg width=\"78\" height=\"32\"><text font-family=\"TypeWriter\" font-size=\"10.0\" font-weight=\"bold\" fill=\"#000000\" fill-opacity=\"1.0\">2.2.2.2</text></svg>",
+                "x": 133,
+                "y": -397,
+                "z": 2
+            },
+            {
+                "drawing_id": "4b3974a9-8658-4f1a-8d20-bcf6d4e9978d",
+                "locked": false,
+                "rotation": 0,
+                "svg": "<svg width=\"78\" height=\"32\"><text font-family=\"TypeWriter\" font-size=\"10.0\" font-weight=\"bold\" fill=\"#000000\" fill-opacity=\"1.0\">4.4.4.4</text></svg>",
+                "x": -100,
+                "y": -293,
                 "z": 2
             }
         ],
@@ -444,8 +480,8 @@
                             "rotation": 0,
                             "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
                             "text": "eth3",
-                            "x": 38,
-                            "y": -33
+                            "x": 35,
+                            "y": -35
                         },
                         "node_id": "c95e0c31-28bb-456f-af1e-70eb78b17e3e",
                         "port_number": 0
@@ -694,7 +730,7 @@
                     "x": 7,
                     "y": -25
                 },
-                "locked": true,
+                "locked": false,
                 "name": "CE1",
                 "node_id": "26de5f44-3173-4879-a582-1db559bcb4c1",
                 "node_type": "docker",
@@ -739,7 +775,7 @@
                     "x": -1,
                     "y": -25
                 },
-                "locked": true,
+                "locked": false,
                 "name": "R101",
                 "node_id": "4b6b7f7c-0419-45ee-9d5f-42d82590a1d3",
                 "node_type": "docker",
@@ -784,7 +820,7 @@
                     "x": -5,
                     "y": -27
                 },
-                "locked": true,
+                "locked": false,
                 "name": "R104",
                 "node_id": "541f8e53-eef5-456d-b3dd-a7bc11ff725f",
                 "node_type": "docker",
@@ -796,13 +832,15 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "ad6090160172725d576e8808eceb28bad9f37a23cf89c6e5f34381824012438c",
-                    "environment": null,
-                    "extra_hosts": null,
-                    "extra_volumes": [],
+                    "container_id": "52be7e08d10f6ec5153a9d284e426ddc4e95d416a220d519b4ee3181bd682ea6",
+                    "environment": "",
+                    "extra_hosts": "",
+                    "extra_volumes": [
+                        "/root"
+                    ],
                     "image": "nsdcourse/frr:10.1.1",
                     "mac_address": "02:42:48:e7:98:00",
-                    "start_command": null,
+                    "start_command": "/root/init.sh",
                     "usage": ""
                 },
                 "symbol": ":/symbols/affinity/circle/red/router2.svg",
@@ -823,12 +861,12 @@
                 "label": {
                     "rotation": 0,
                     "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
-                    "text": "R103",
+                    "text": "R102",
                     "x": -1,
                     "y": -25
                 },
-                "locked": true,
-                "name": "R103",
+                "locked": false,
+                "name": "R102",
                 "node_id": "9269ebe4-ee1d-4553-9db0-6dc01a77d9c7",
                 "node_type": "docker",
                 "port_name_format": "Ethernet{0}",
@@ -839,13 +877,15 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "4819e0928dd00306ff2d71c0c19cea95bf5e9d74bcfe2834ce3b23cf2f7fd76d",
-                    "environment": null,
-                    "extra_hosts": null,
-                    "extra_volumes": [],
+                    "container_id": "f170ad6ad8011f3319930453b2c190cf10a300a9a1e0b9d06371c5b0ce7228b4",
+                    "environment": "",
+                    "extra_hosts": "",
+                    "extra_volumes": [
+                        "/root"
+                    ],
                     "image": "nsdcourse/frr:10.1.1",
                     "mac_address": "02:42:b0:e4:56:00",
-                    "start_command": null,
+                    "start_command": "/root/init.sh",
                     "usage": ""
                 },
                 "symbol": ":/symbols/affinity/circle/red/router2.svg",
@@ -866,12 +906,12 @@
                 "label": {
                     "rotation": 0,
                     "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
-                    "text": "R102",
-                    "x": -64,
-                    "y": 12
+                    "text": "R103",
+                    "x": -58,
+                    "y": 7
                 },
-                "locked": true,
-                "name": "R102",
+                "locked": false,
+                "name": "R103",
                 "node_id": "c95e0c31-28bb-456f-af1e-70eb78b17e3e",
                 "node_type": "docker",
                 "port_name_format": "Ethernet{0}",
@@ -882,13 +922,15 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "cdbd19ef1b85a955269e38c08dc2bdb1e51109c76640505ef923440448baa83a",
-                    "environment": null,
-                    "extra_hosts": null,
-                    "extra_volumes": [],
+                    "container_id": "fc9e1088014fc15cd3f7481ae328da8451422c50d4bcc384969010442382856d",
+                    "environment": "",
+                    "extra_hosts": "",
+                    "extra_volumes": [
+                        "/root"
+                    ],
                     "image": "nsdcourse/frr:10.1.1",
                     "mac_address": "02:42:56:06:23:00",
-                    "start_command": null,
+                    "start_command": "/root/init.sh",
                     "usage": ""
                 },
                 "symbol": ":/symbols/affinity/circle/red/router2.svg",
@@ -913,7 +955,7 @@
                     "x": -47,
                     "y": 12
                 },
-                "locked": true,
+                "locked": false,
                 "name": "CE3",
                 "node_id": "5d9c70a3-eae6-456a-96e7-2a3cab092e76",
                 "node_type": "docker",
@@ -1003,7 +1045,7 @@
                     "x": -104,
                     "y": 11
                 },
-                "locked": true,
+                "locked": false,
                 "name": "Client-A1",
                 "node_id": "a06ae35b-4907-4050-8efe-c44e07aa7113",
                 "node_type": "docker",
@@ -1183,7 +1225,7 @@
                     "x": -15,
                     "y": 57
                 },
-                "locked": true,
+                "locked": false,
                 "name": "RADIUS",
                 "node_id": "c34d8304-7edb-43c2-9ddb-007357bf8bdb",
                 "node_type": "docker",
