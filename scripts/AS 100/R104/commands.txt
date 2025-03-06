@@ -1,7 +1,7 @@
 configure
 !
 interface lo
-    ip address 4.4.4.4/32
+    ip address 5.170.0.104/32
 !
 interface eth1
     ip address 10.0.11.2/30
@@ -13,8 +13,8 @@ interface eth3
     ip address 10.0.11.9/30
 !
 router ospf
-    router-id 4.4.4.4
-    network 4.4.4.4/32 area 0
+    router-id 5.170.0.104
+    network 5.170.0.104/32 area 0
     network 10.0.11.0/30 area 0
     network 10.0.11.4/30 area 0
     network 10.0.11.8/30 area 0
