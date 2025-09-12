@@ -6,9 +6,7 @@ ip link set vpn10 up
 ip link set eth0 master vpn10
 
 ## Pre MPLS setup
-echo 'net.mpls.conf.lo.input=1' >> /etc/sysctl.conf
-echo 'net.mpls.conf.eth1.input=1' >> /etc/sysctl.conf
-echo 'net.mpls.conf.vpn10.input=1' >> /etc/sysctl.conf
-echo 'net.mpls.platform_labels=100000' >> /etc/sysctl.conf
-
-sysctl -p
+sysctl -w net.mpls.conf.lo.input=1
+sysctl -w net.mpls.conf.eth1.input=1
+sysctl -w net.mpls.conf.vpn10.input=1
+sysctl -w net.mpls.platform_labels=100000
