@@ -358,6 +358,33 @@
                 "x": -123,
                 "y": -294,
                 "z": 2
+            },
+            {
+                "drawing_id": "ea6c19e0-8a4d-4141-b9f5-14d6a80caa13",
+                "locked": false,
+                "rotation": 0,
+                "svg": "<svg width=\"113\" height=\"32\"><text font-family=\"TypeWriter\" font-size=\"10.0\" font-weight=\"bold\" fill=\"#000000\" fill-opacity=\"1.0\">AS: 64501</text></svg>",
+                "x": -918,
+                "y": -468,
+                "z": 2
+            },
+            {
+                "drawing_id": "ddab3b9f-acca-46c1-91b3-6ad78e71d6a0",
+                "locked": false,
+                "rotation": 0,
+                "svg": "<svg width=\"113\" height=\"32\"><text font-family=\"TypeWriter\" font-size=\"10.0\" font-weight=\"bold\" fill=\"#000000\" fill-opacity=\"1.0\">AS: 64502</text></svg>",
+                "x": 743,
+                "y": -489,
+                "z": 2
+            },
+            {
+                "drawing_id": "8b9a548c-1dcb-4859-904a-4cb840a79ac2",
+                "locked": false,
+                "rotation": 0,
+                "svg": "<svg width=\"113\" height=\"32\"><text font-family=\"TypeWriter\" font-size=\"10.0\" font-weight=\"bold\" fill=\"#000000\" fill-opacity=\"1.0\">AS: 64503</text></svg>",
+                "x": 79,
+                "y": 170,
+                "z": 2
             }
         ],
         "links": [
@@ -742,7 +769,7 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "ffb0d7aa0fd03878671738b10192a12034900b935e64f0a3d4194cc7a22934ef",
+                    "container_id": "c779c9ad3427e501213fb8a441fe108014d21fe17b9690fa90e60e6cd7de651f",
                     "environment": "",
                     "extra_hosts": "",
                     "extra_volumes": [
@@ -787,7 +814,7 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "fc06c153b9d0a3b0714e7963d789d65a918dead00562460bb6ab787fe3c417f3",
+                    "container_id": "aee6dbc3f9eb494bdd8248f0b060f1a7c0af9911807fd9710a0b5da6e8ce92c0",
                     "environment": "",
                     "extra_hosts": "",
                     "extra_volumes": [
@@ -802,7 +829,7 @@
                 "template_id": "fc163ad8-0891-4431-882b-a61ac70f407b",
                 "width": 60,
                 "x": -92,
-                "y": -245,
+                "y": -246,
                 "z": 1
             },
             {
@@ -832,7 +859,7 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "b34671cd158b733ddb9fab3b11b14cda0aa354e340db9b68337f04d7dae40e56",
+                    "container_id": "f71bb21c1250bf4774559ea276b1213a522b8f201eeed5db6f01c5da560dedd8",
                     "environment": "",
                     "extra_hosts": "",
                     "extra_volumes": [
@@ -877,7 +904,7 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "5977a410620a7ed6f5a2258ea9eb838c16c7c52b6f18669d5bf68cecd1eee43a",
+                    "container_id": "7695e1dd8be1a7fa8a32de88a465422fa3d6476561184a9fd4058d9db2a48d50",
                     "environment": "",
                     "extra_hosts": "",
                     "extra_volumes": [
@@ -922,7 +949,7 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "7794679dded5de5380f7101a98d978fe3c3e07ba36cc90f9fa8f3808736952ee",
+                    "container_id": "d3501ae3208b50f7f72b5da049d87a1ee2b60611b4e3c6c5439becd5b5463485",
                     "environment": "",
                     "extra_hosts": "",
                     "extra_volumes": [
@@ -967,7 +994,7 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "821713cb0f54e037dfea697280d2b976672e2fab51abb60b351d4beaf0c23df0",
+                    "container_id": "254f59e9a8e4096cec01b8eea7698236742bffe0a6fc392b55e2c4884f3f85e7",
                     "environment": "",
                     "extra_hosts": "",
                     "extra_volumes": [
@@ -1012,7 +1039,7 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "d8589a4039bab55cdb1fcffcfb3b0d872b34ec1036e6ead44dd609cbcdf91476",
+                    "container_id": "b21e675763c81a2d2dba962601587635e1c98834f937a7694b7fc2a509a1e127",
                     "environment": "",
                     "extra_hosts": "",
                     "extra_volumes": [
@@ -1057,7 +1084,7 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "2600eab025d8dde3cdd2d51c6e1e37a310150a61ddc95268666b0cab1d556a53",
+                    "container_id": "25bde43dde99ed553122bee7c6a627bfc69101a45363c77df3b1a68c11e594da",
                     "environment": "",
                     "extra_hosts": "",
                     "extra_volumes": [
@@ -1102,7 +1129,7 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "55ee4f4fcba11f436b22c623118051f0d3ddc343168446d896af886d5988260a",
+                    "container_id": "e61d59d243bb162fc10a0dbe890f5dc709022ca5365ef5043a3d4fa4383b03e1",
                     "environment": null,
                     "extra_hosts": null,
                     "extra_volumes": [],
@@ -1145,13 +1172,15 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "9fda8b738219692f82662bd3d36dc10c7a1407bdf76a27adbb62714b23f01b04",
-                    "environment": null,
-                    "extra_hosts": null,
-                    "extra_volumes": [],
+                    "container_id": "53f3feecf3221351218aac23720d76df776662b71cf926e5060086cf00f25c3b",
+                    "environment": "",
+                    "extra_hosts": "",
+                    "extra_volumes": [
+                        "/root"
+                    ],
                     "image": "nsdcourse/frr:10.1.1",
                     "mac_address": "02:42:60:8b:8e:00",
-                    "start_command": null,
+                    "start_command": "/root/init.sh",
                     "usage": ""
                 },
                 "symbol": ":/symbols/affinity/circle/blue/router.svg",
@@ -1188,13 +1217,15 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "58e1e09334330fd42b03712b2ad15e45340eb1925512afca369e365f7bf08cf4",
-                    "environment": null,
-                    "extra_hosts": null,
-                    "extra_volumes": [],
+                    "container_id": "07f7e376a78a03aa1a1b6c808a1b158face6e2cda007791a428262a8523c0c42",
+                    "environment": "",
+                    "extra_hosts": "",
+                    "extra_volumes": [
+                        "/root"
+                    ],
                     "image": "nsdcourse/frr:10.1.1",
                     "mac_address": "02:42:a5:ea:44:00",
-                    "start_command": null,
+                    "start_command": "/root/init.sh",
                     "usage": ""
                 },
                 "symbol": ":/symbols/affinity/circle/blue/router.svg",
@@ -1231,13 +1262,15 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "426c3192d4e1f2c454d89b9d8a479f03bec3d35140e4a968eb026162f866e42f",
-                    "environment": null,
-                    "extra_hosts": null,
-                    "extra_volumes": [],
+                    "container_id": "86876400f4c9af2785411435f3feb6e72f1033acbea926caf92df9da21b0d287",
+                    "environment": "",
+                    "extra_hosts": "",
+                    "extra_volumes": [
+                        "/root"
+                    ],
                     "image": "nsdcourse/frr:10.1.1",
                     "mac_address": "02:42:c8:b0:46:00",
-                    "start_command": null,
+                    "start_command": "/root/init.sh",
                     "usage": ""
                 },
                 "symbol": ":/symbols/affinity/circle/blue/router.svg",
@@ -1252,5 +1285,5 @@
     "type": "topology",
     "variables": [],
     "version": "2.2.52",
-    "zoom": 100
+    "zoom": 84
 }
