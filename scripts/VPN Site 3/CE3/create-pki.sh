@@ -23,8 +23,3 @@ done
 
 # for server only
 cp ${PKI}/dh.pem ${OPENVPN}/server
-
-# ccd configuration
-mkdir -p ${OPENVPN}/ccd
-echo "iroute 192.168.1.0 255.255.255.0" > ${OPENVPN}/ccd/client1
-echo "iroute 192.168.2.0 255.255.255.0" > ${OPENVPN}/ccd/client2
