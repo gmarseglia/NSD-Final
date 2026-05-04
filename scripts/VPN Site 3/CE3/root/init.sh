@@ -7,7 +7,7 @@ ip route add default via 10.1.3.1
 
 sysctl -w net.ipv4.ip_forward=1 >/dev/null 2>&1
 
-# openvpn --config server.conf --daemon
+openvpn --config /root/server.conf --daemon
 
 ## Conclude
 cd

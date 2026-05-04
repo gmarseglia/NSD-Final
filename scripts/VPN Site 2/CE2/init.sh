@@ -7,6 +7,8 @@ ip route add default via 10.1.2.1
 
 sysctl -w net.ipv4.ip_forward=1 >/dev/null 2>&1
 
+openvpn --config /root/client2.conf --daemon
+
 ## Conclude
 cd
 exec bash
