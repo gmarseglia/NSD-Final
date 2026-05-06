@@ -273,7 +273,7 @@
                 "drawing_id": "1ff56842-c2b5-42c8-a0e6-d286e1374393",
                 "locked": false,
                 "rotation": 0,
-                "svg": "<svg width=\"20\" height=\"24\"><text font-family=\"TypeWriter\" font-size=\"10.0\" font-weight=\"bold\" fill=\"#000000\" fill-opacity=\"1.0\">.1</text></svg>",
+                "svg": "<svg width=\"20\" height=\"24\"><text font-family=\"TypeWriter\" font-size=\"10.0\" font-weight=\"bold\" fill=\"#000000\" fill-opacity=\"1.0\">.2</text></svg>",
                 "x": 563,
                 "y": -56,
                 "z": 2
@@ -282,7 +282,7 @@
                 "drawing_id": "cd83e93c-b2d2-4827-b840-3f9ea025b292",
                 "locked": false,
                 "rotation": 0,
-                "svg": "<svg width=\"20\" height=\"24\"><text font-family=\"TypeWriter\" font-size=\"10.0\" font-weight=\"bold\" fill=\"#000000\" fill-opacity=\"1.0\">.1</text></svg>",
+                "svg": "<svg width=\"20\" height=\"24\"><text font-family=\"TypeWriter\" font-size=\"10.0\" font-weight=\"bold\" fill=\"#000000\" fill-opacity=\"1.0\">.2</text></svg>",
                 "x": 768,
                 "y": -30,
                 "z": 2
@@ -1249,5 +1249,5 @@
     "type": "topology",
     "variables": [],
     "version": "2.2.57",
-    "zoom": 100
+    "zoom": 50
 }
