@@ -1,7 +1,7 @@
 #!/bin/bash
 
-ip addr add  192.168.32.1/24 dev eth0
-ip route add default via 192.168.32.1
+ip addr add  192.168.95.1/24 dev eth0
+ip route add default via 192.168.95.1
 
 cd
 exec bash
