@@ -1,8 +1,8 @@
 #!/bin/bash
 
 ## Initialize networking
-ip link add link eth1 name eth0.32 type vlan id 32
-ip link add link eth1 name eth0.95 type vlan id 95
+ip link add link eth0 name eth0.32 type vlan id 32
+ip link add link eth0 name eth0.95 type vlan id 95
 ip link set eth0.32 up
 ip link set eth0.95 up
 

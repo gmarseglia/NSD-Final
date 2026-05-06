@@ -1179,7 +1179,7 @@
                     "console_http_path": "/",
                     "console_http_port": 80,
                     "console_resolution": "1024x768",
-                    "container_id": "caae9b19a0f758e71e391c026a1a6490924050374aa3eb55f01df006df2da265",
+                    "container_id": "f31b645d0ad7013808937fe022826a35b4e6d5d459948b365816e1e9dc3e4b0d",
                     "environment": "",
                     "extra_hosts": "",
                     "extra_volumes": [
@@ -1188,7 +1188,7 @@
                     ],
                     "image": "nsdcourse/basenet:latest",
                     "mac_address": "02:42:85:58:84:00",
-                    "start_command": null,
+                    "start_command": "/root/init.sh",
                     "usage": ""
                 },
                 "symbol": ":/symbols/affinity/circle/green/client.svg",
@@ -1249,5 +1249,5 @@
     "type": "topology",
     "variables": [],
     "version": "2.2.57",
-    "zoom": 50
+    "zoom": 71
 }
