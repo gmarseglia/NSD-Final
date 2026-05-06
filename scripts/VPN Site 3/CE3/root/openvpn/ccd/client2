@@ -1,3 +1,7 @@
+# Push to client: the sroute for the other client-side 
 push "route 192.168.1.0 255.255.255.0"
-push "route 192.168.3.0 255.255.255.0"
+
+# Set to OpenVPN: source of the client-side
 iroute 192.168.2.0 255.255.255.0
+iroute 192.168.32.0 255.255.255.0
+iroute 192.168.95.0 255.255.255.0
