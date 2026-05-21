@@ -35,6 +35,9 @@ ebtables -P FORWARD DROP
 ebtables -P INPUT ACCEPT
 ebtables -P OUTPUT ACCEPT
 
+# BPF
+mount -t bpf bpf /sys/fs/bpf/
+
 ## Conclude
 cd
 exec bash
