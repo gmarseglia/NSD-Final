@@ -1,7 +1,8 @@
 CC = clang
 CFLAGS = -O2 -g -Wall -target bpf -D__TARGET_ARCH_x86
 INCLUDES = -I/usr/include
-INCLUDES += -I/workspace/xdp-tutorial/lib/install/include
+# INCLUDES += -I/workspace/xdp-tutorial/lib/install/include
+INCLUDES += -I/home/giuseppe/NSD/xdp-tutorial/lib/install/include
 
 SRC = xdp_radius.c
 OBJ = xdp_radius.o
