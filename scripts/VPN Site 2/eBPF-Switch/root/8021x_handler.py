@@ -75,6 +75,13 @@ def get_vlan_id(mac: str) -> str | None:
         return None
 
 
+def get_bytes(mac: str) -> str | None:
+    """Get the bytes of the given MAC address"""
+    mac_fmt = mac.replace(":", "-").upper()
+    hex_key_list = [f"{ord(c):02x}" for c in mac_fmt] + ["00"]
+    return " ".join(hex_key_list)
+
+
 def handle_event(interface, event, mac=None):
     """Handle the event and update allowed_macs list"""
     config = load_config()
@@ -100,13 +107,12 @@ def handle_event(interface, event, mac=None):
             # Run commands
             port = get_physical_port(mac)
             vlan_id = get_vlan_id(mac)
-            mac_fmt = mac.replace(":", "-").upper()
+            bytes = get_bytes(mac)
             run_cmd(f"ebtables -D FORWARD -s {mac} -j ACCEPT")
             run_cmd(f"ebtables -D FORWARD -d {mac} -j ACCEPT")
             run_cmd(f"bridge vlan del dev {port} vid {vlan_id}")
             run_cmd(f"bridge vlan add dev {port} vid 1 pvid untagged")
-            # TODO: fix 
-            # run_cmd(f"bpftool map del name radius_sessions {mac_fmt}")
+            run_cmd(f"bpftool map delete name radius_sessions key hex {bytes}")
         print(f"{interface}: Denied traffic from {mac}")
     else:
         print(f"Unhadled event: {event}, ignoring...")
@@ -123,7 +129,7 @@ if __name__ == "__main__":
     )
     if mac and is_valid_mac(mac):
         print(
-            f", sys.argv[3]/mac: {mac}, port: {get_physical_port(mac)}, vlan_id: {get_vlan_id(mac)}",
+            f", sys.argv[3]/mac: {mac}, port: {get_physical_port(mac)}, vlan_id: {get_vlan_id(mac)}, bytes: {get_bytes(mac)}",
             end="",
         )
     print("")
