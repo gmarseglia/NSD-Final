@@ -26,12 +26,91 @@
 #define VAL_LEN 5
 #define MAX_RADIUS_ATTRS 32
 
-struct radius_hdr {
+struct radiushdr {
   __u8 code;
   __u8 id;
   __be16 len;
   __u8 authenticator[16];
 } __attribute__((packed));
+
+/* Header cursor to keep track of current parsing position */
+struct hdr_cursor {
+  void *pos;
+};
+
+static __always_inline int parse_ethhdr(struct hdr_cursor *nh, void *data_end,
+                                        struct ethhdr **ethhdr) {
+  struct ethhdr *eth = nh->pos;
+  int hdrsize = sizeof(*eth);
+
+  /* Byte-count bounds check; check if current pointer + size of header
+   * is after data_end.
+   */
+  if ((void *)(eth + 1) > data_end)
+    return -1;
+
+  nh->pos += hdrsize;
+  *ethhdr = eth;
+
+  return eth->h_proto; /* network-byte-order */
+}
+
+static __always_inline int parse_iphdr(struct hdr_cursor *nh, void *data_end,
+                                       struct iphdr **iphdr) {
+  struct iphdr *iph = nh->pos;
+  int hdrsize;
+
+  if ((void *)(iph + 1) > data_end)
+    return -1;
+
+  hdrsize = iph->ihl * 4;
+  /* Sanity check packet field is valid */
+  if (hdrsize < sizeof(*iph))
+    return -1;
+
+  /* Variable-length IPv4 header, need to use byte-based arithmetic */
+  if (nh->pos + hdrsize > data_end)
+    return -1;
+
+  nh->pos += hdrsize;
+  *iphdr = iph;
+
+  return iph->protocol;
+}
+
+static __always_inline int parse_udphdr(struct hdr_cursor *nh, void *data_end,
+                                        struct udphdr **udphdr) {
+  struct udphdr *udph = nh->pos;
+  int hdrsize = sizeof(*udph);
+
+  /* Byte-count bounds check; check if current pointer + size of header
+   * is after data_end.
+   */
+  if ((void *)(udph + 1) > data_end)
+    return -1;
+
+  nh->pos += hdrsize;
+  *udphdr = udph;
+
+  return 0; /* network-byte-order */
+}
+
+static __always_inline int parse_radiushdr(struct hdr_cursor *nh, void *data_end,
+                                        struct radiushdr **radiushdr) {
+  struct radiushdr *radiush = nh->pos;
+  int hdrsize = sizeof(*radiush);
+
+  /* Byte-count bounds check; check if current pointer + size of header
+   * is after data_end.
+   */
+  if ((void *)(radiush + 1) > data_end)
+    return -1;
+
+  nh->pos += hdrsize;
+  *radiushdr = radiush;
+
+  return 0; /* network-byte-order */
+}
 
 /* Define the Pinned Map */
 struct {
@@ -43,106 +122,57 @@ struct {
 } radius_sessions SEC(".maps");
 
 SEC("xdp")
-int xdp_radius_parser(struct xdp_md *ctx) {
+int xdp_parser_func(struct xdp_md *ctx) {
   void *data_end = (void *)(long)ctx->data_end;
   void *data = (void *)(long)ctx->data;
+  struct ethhdr *eth;
+  struct iphdr *iph;
+  struct udphdr *udph;
+  struct radiushdr *radh;
 
-  /* 1. Parse Ethernet Header */
-  struct ethhdr *eth = data;
-  if ((void *)(eth + 1) > data_end)
-    return XDP_PASS;
+  /* These keep track of the next header type and iterator pointer */
+  struct hdr_cursor nh;
+  int nh_type;
 
-  if (eth->h_proto != bpf_htons(ETH_P_IP))
-    return XDP_PASS;
+  /* Start next header cursor position at data start */
+  nh.pos = data;
 
-  /* 2. Parse IPv4 Header (Enforce 20-byte static header for safety) */
-  struct iphdr *ip = (void *)(eth + 1);
-  if ((void *)(ip + 1) > data_end)
-    return XDP_PASS;
+  /* Packet parsing in steps: Get each header one at a time, aborting if
+   * parsing fails. Each helper function does sanity checking (is the
+   * header type in the packet correct?), and bounds checking.
+   */
+  nh_type = parse_ethhdr(&nh, data_end, &eth);
+  if (nh_type != bpf_htons(ETH_P_IP))
+    goto out;
 
-  if (ip->protocol != IPPROTO_UDP || ip->ihl != 5)
-    return XDP_PASS;
+  /* Parse IPv4 header
+   */
+  nh_type = parse_iphdr(&nh, data_end, &iph);
+  if (nh_type != IPPROTO_UDP)
+    goto out;
 
-  /* 3. Parse UDP Header */
-  struct udphdr *udp = (void *)(ip + 1);
-  if ((void *)(udp + 1) > data_end)
-    return XDP_PASS;
+  /* Parse UDP header
+   */
+  nh_type = parse_udphdr(&nh, data_end, &udph);
+  if (nh_type != 0 || udph->source != bpf_htons(RADIUS_PORT))
+    goto out;
 
-  if (udp->source != bpf_htons(RADIUS_PORT))
-    return XDP_PASS;
+  /* Parse RADIUS header
+   */
+  nh_type = parse_radiushdr(&nh, data_end, &radh);
+  if (nh_type != 0)
+    goto out;
 
-  /* 4. Parse RADIUS Header */
-  struct radius_hdr *rad = (void *)(udp + 1);
-  if ((void *)(rad + 1) > data_end)
-    return XDP_PASS;
+  /* Filter only Success messages */
+  if (radh->code != RADIUS_CODE_ACCESS_ACCEPT)
+    goto out;
 
-  if (rad->code != RADIUS_CODE_ACCESS_ACCEPT)
-    return XDP_PASS;
-
-  /* Phase variables - Use stack primitives, NOT packet pointers */
-  char key[KEY_LEN] = {0};
-  char val[VAL_LEN] = {0};
-  __u8 found_key = 0;
-  __u8 found_val = 0;
-  __u8 *attr_ptr = (__u8 *)(rad + 1);
-
-  /* =========================================
-   * PHASE 1: SEARCH & ISOLATE TO STACK
-   * ========================================= */
-  for (int i = 0; i < MAX_RADIUS_ATTRS; i++) {
-    /* 1. Header bounds check */
-    if (attr_ptr + 2 > (__u8 *)data_end)
-      break;
-
-    __u8 attr_type = attr_ptr[0];
-    __u8 attr_len = attr_ptr[1];
-    __u8 *attr_val_ptr = attr_ptr + 2;
-    __u8 attr_val_len = attr_len - 2;
-
-    /* 2. Full attribute bounds check */
-    if (attr_ptr + attr_len > (__u8 *)data_end)
-      break;
-
-    /* 3. Extract immediately to stack if found */
-    if (attr_type == RADIUS_ATTR_CALLING_STATION_ID) {
-      // Strict check before copy makes the verifier happy immediately
-      if (attr_val_ptr + KEY_LEN <= (__u8 *)data_end) {
-        __builtin_memcpy(key, attr_val_ptr, KEY_LEN);
-        if (attr_val_len >= KEY_LEN)
-          key[KEY_LEN - 1] = '\0';
-        else
-          key[attr_val_len] = '\0';
-        found_key = 1;
-      }
-    } else if (attr_type == RADIUS_ATTR_TUNNEL_PRIVATE_GROUP_ID) {
-      if (attr_val_ptr + VAL_LEN <= (__u8 *)data_end) {
-        __builtin_memcpy(val, attr_val_ptr, VAL_LEN);
-        if (attr_val_len >= VAL_LEN)
-          val[VAL_LEN - 1] = '\0';
-        else
-          val[attr_val_len] = '\0';
-        found_val = 1;
-      }
-    }
-
-    /* 4. Early exit if we have both */
-    if (found_key && found_val)
-      break;
-
-    /* 5. Jump to next attribute */
-    attr_ptr += attr_len;
-  }
-
-  /* =========================================
-   * PHASE 2: MAP UPDATE (Flat execution path)
-   * ========================================= */
-  // The verifier loves this because 'key' and 'val' are strictly stack memory
-  // now, meaning no complex packet boundary math is required here.
-  if (found_key && found_val) {
-    bpf_map_update_elem(&radius_sessions, key, val, BPF_ANY);
-  }
-
-  return XDP_PASS;
+out:
+  /* Default action XDP_PASS, imply everything we couldn't parse, or that
+   * we don't want to deal with, we just pass up the stack and let the
+   * kernel deal with it.
+   */
+  return XDP_PASS; /* read via xdp_stats */
 }
 
 char _license[] SEC("license") = "GPL";
