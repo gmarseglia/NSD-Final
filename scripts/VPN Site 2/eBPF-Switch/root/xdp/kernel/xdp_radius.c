@@ -95,8 +95,9 @@ static __always_inline int parse_udphdr(struct hdr_cursor *nh, void *data_end,
   return 0; /* network-byte-order */
 }
 
-static __always_inline int parse_radiushdr(struct hdr_cursor *nh, void *data_end,
-                                        struct radiushdr **radiushdr) {
+static __always_inline int parse_radiushdr(struct hdr_cursor *nh,
+                                           void *data_end,
+                                           struct radiushdr **radiushdr) {
   struct radiushdr *radiush = nh->pos;
   int hdrsize = sizeof(*radiush);
 
@@ -110,6 +111,51 @@ static __always_inline int parse_radiushdr(struct hdr_cursor *nh, void *data_end
   *radiushdr = radiush;
 
   return 0; /* network-byte-order */
+}
+
+static __always_inline int fill_entry(struct hdr_cursor *nh, void *data_end,
+                                      char key[KEY_LEN], char val[VAL_LEN]) {
+  __u8 *attr_ptr = nh->pos;
+  __u8 found_key = 0;
+  __u8 found_val = 0;
+
+  for (int i = 0; i < MAX_RADIUS_ATTRS; i++) {
+    if ((void *)attr_ptr + 2 > data_end)
+      return -1;
+
+    __u8 attr_type = *attr_ptr;
+    __u8 attr_len = *(attr_ptr + 1);
+
+    if (attr_len < 2)
+      return -1;
+
+    __u8 *attr_val_ptr = attr_ptr + 2;
+    __u8 attr_val_len = attr_len - 2;
+
+    if ((void *)(attr_val_ptr + attr_val_len) > data_end)
+      return -1;
+
+    if (attr_type == RADIUS_ATTR_CALLING_STATION_ID) {
+      if (attr_val_len > KEY_LEN - 1)
+        return -1;
+      bpf_probe_read_kernel(key, attr_val_len, attr_val_ptr);
+      key[attr_val_len] = '\0';
+      found_key = 1;
+    } else if (attr_type == RADIUS_ATTR_TUNNEL_PRIVATE_GROUP_ID) {
+      if (attr_val_len > VAL_LEN - 1)
+        return -1;
+      bpf_probe_read_kernel(val, attr_val_len, attr_val_ptr);
+      val[attr_val_len] = '\0';
+      found_val = 1;
+    }
+
+    if (found_key && found_val)
+      return 0;
+
+    attr_ptr += attr_len;
+  }
+
+  return -1;
 }
 
 /* Define the Pinned Map */
@@ -129,10 +175,13 @@ int xdp_parser_func(struct xdp_md *ctx) {
   struct iphdr *iph;
   struct udphdr *udph;
   struct radiushdr *radh;
+  char key[KEY_LEN] = {0};
+  char val[VAL_LEN] = {0};
 
   /* These keep track of the next header type and iterator pointer */
   struct hdr_cursor nh;
   int nh_type;
+  int ret;
 
   /* Start next header cursor position at data start */
   nh.pos = data;
@@ -166,6 +215,16 @@ int xdp_parser_func(struct xdp_md *ctx) {
   /* Filter only Success messages */
   if (radh->code != RADIUS_CODE_ACCESS_ACCEPT)
     goto out;
+
+  /* Find and fill attributes: CALLING_STATION_ID and TUNNEL_PRIVATE_GROUP_ID
+   * from the Radius attributes
+   */
+  ret = fill_entry(&nh, data_end, key, val);
+
+  if (ret != 0)
+    goto out;
+
+  bpf_map_update_elem(&radius_sessions, key, val, BPF_ANY);
 
 out:
   /* Default action XDP_PASS, imply everything we couldn't parse, or that
