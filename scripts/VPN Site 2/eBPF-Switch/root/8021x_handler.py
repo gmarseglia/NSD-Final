@@ -30,7 +30,7 @@ def save_config(config):
         json.dump(config, f, indent=4)
 
 
-def run_ebtables_cmd(command):
+def run_cmd(command):
     """Helper function to run ebtables commands"""
     try:
         subprocess.run(command, check=True, shell=True)
@@ -62,8 +62,8 @@ def get_physical_port(mac: str) -> str | None:
 
 def get_vlan_id(mac: str) -> str | None:
     """Get the VLAN ID associated with the given MAC address"""
-    # Get the association dictionary
     result = run_cmd_and_return(f"bpftool map dump name radius_sessions")
+    # Get the association dictionary
     parsed_list = json.loads(result)
     map = {item["key"]: item["value"] for item in parsed_list}
     # Format the MAC address
@@ -79,29 +79,34 @@ def handle_event(interface, event, mac=None):
     """Handle the event and update allowed_macs list"""
     config = load_config()
     if event in ("AP-STA-CONNECTED") and mac:
+        port = get_physical_port(mac)
+        vlan_id = get_vlan_id(mac)
         if mac not in config["allowed_macs"]:
+            # Save config
             config["allowed_macs"].append(mac)
-            run_ebtables_cmd(f"ebtables -A FORWARD -s {mac} -j ACCEPT")
-            run_ebtables_cmd(f"ebtables -A FORWARD -d {mac} -j ACCEPT")
-            run_ebtables_cmd(
-                f"bridge vlan add dev {get_physical_port(mac)} vid {get_vlan_id(mac)} pvid untagged"
-            )
-            run_ebtables_cmd(f"bridge vlan add dev eth0 vid {get_vlan_id(mac)}")
-            run_ebtables_cmd(f"bridge vlan add dev br-auth vid {get_vlan_id(mac)} self")
             save_config(config)
+            # Run commands
+            run_cmd(f"ebtables -A FORWARD -s {mac} -j ACCEPT")
+            run_cmd(f"ebtables -A FORWARD -d {mac} -j ACCEPT")
+            run_cmd(f"bridge vlan add dev {port} vid {vlan_id} pvid untagged")
+            run_cmd(f"bridge vlan add dev eth0 vid {vlan_id}")
+            run_cmd(f"bridge vlan add dev br-auth vid {vlan_id} self")
         print(f"{interface}: Allowed traffic from {mac}")
     elif event in ("AP-STA-DISCONNECTED") and mac:
         if mac in config["allowed_macs"]:
+            # Save config
             config["allowed_macs"].remove(mac)
-            run_ebtables_cmd(f"ebtables -D FORWARD -s {mac} -j ACCEPT")
-            run_ebtables_cmd(f"ebtables -D FORWARD -d {mac} -j ACCEPT")
-            run_ebtables_cmd(
-                f"bridge vlan del dev {get_physical_port(mac)} vid {get_vlan_id(mac)}"
-            )
-            run_ebtables_cmd(
-                f"bridge vlan add dev {get_physical_port(mac)} vid 1 pvid untagged"
-            )
             save_config(config)
+            # Run commands
+            port = get_physical_port(mac)
+            vlan_id = get_vlan_id(mac)
+            mac_fmt = mac.replace(":", "-").upper()
+            run_cmd(f"ebtables -D FORWARD -s {mac} -j ACCEPT")
+            run_cmd(f"ebtables -D FORWARD -d {mac} -j ACCEPT")
+            run_cmd(f"bridge vlan del dev {port} vid {vlan_id}")
+            run_cmd(f"bridge vlan add dev {port} vid 1 pvid untagged")
+            # TODO: fix 
+            # run_cmd(f"bpftool map del name radius_sessions {mac_fmt}")
         print(f"{interface}: Denied traffic from {mac}")
     else:
         print(f"Unhadled event: {event}, ignoring...")
@@ -113,11 +118,14 @@ if __name__ == "__main__":
     mac = sys.argv[3] if len(sys.argv) > 3 else None
 
     print(
-        f"\nGot sys.argv[1]/interface: {interface}, sys.argv[2]/event: {event}, sys.argv[3]/mac: {mac}",
+        f"\nGot sys.argv[1]/interface: {interface}, sys.argv[2]/event: {event}",
         end="",
     )
     if mac and is_valid_mac(mac):
-        print(f", port: {get_physical_port(mac)}, vlan_id: {get_vlan_id(mac)}", end="")
+        print(
+            f", sys.argv[3]/mac: {mac}, port: {get_physical_port(mac)}, vlan_id: {get_vlan_id(mac)}",
+            end="",
+        )
     print("")
 
     handle_event(interface, event, mac)
