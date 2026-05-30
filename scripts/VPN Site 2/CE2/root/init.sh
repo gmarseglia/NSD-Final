@@ -13,7 +13,7 @@ ip addr add 192.168.95.1/24 dev eth0.95
 
 ip route add default via 10.1.2.1
 
-sysctl -w net.ipv4.ip_forward=1 >/dev/null 2>&1
+echo 1 > /proc/sys/net/ipv4/ip_forward
 
 openvpn --config /root/client2.conf --daemon
 
