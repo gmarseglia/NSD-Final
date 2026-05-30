@@ -1,0 +1,59 @@
+# Last Modified: Fri May 29 16:59:09 2026
+abi <abi/4.0>,
+
+include <tunables/global>
+
+/usr/sbin/proftpd {
+  include <abstractions/base>
+  include <abstractions/nameservice>
+  include <abstractions/wutmp>
+
+  capability audit_write,
+  capability kill,
+  capability net_bind_service,
+  capability setgid,
+  capability setuid,
+
+  /etc/login.defs r,
+  /etc/shells r,
+  /run/proftpd.* wk,
+  /usr/sbin/proftpd mr,
+  /usr/sbin/unix_chkpwd Px,
+  /var/log/proftpd/* w,
+  owner /etc/ftpusers r,
+  owner /etc/group r,
+  owner /etc/host.conf r,
+  owner /etc/hosts r,
+  owner /etc/nsswitch.conf r,
+  owner /etc/pam.d/* r,
+  owner /etc/passwd r,
+  owner /etc/proftpd/* r,
+  owner /etc/proftpd/*/ r,
+  owner /etc/protocols r,
+  owner /etc/resolv.conf r,
+  owner /etc/services r,
+  owner /proc/*/loginuid r,
+  owner /run/proftpd.* rwk,
+  owner /run/test.sock w,
+
+  # Deny writes to /etc
+  audit deny /etc/** w,
+
+  # Deny read from critical files
+  audit deny /etc/shadow r,
+
+  # Jail users into their home directory
+  owner /home/** rw,
+
+  # Deny access to SSH files
+  audit deny /home/*/.ssh/ rwlkx,
+  audit deny /home/*/.ssh/** rwlkx,
+  audit deny /root/.ssh/ rwlkx,
+  audit deny /root/.ssh/** rwlkx,
+
+  # Deny root access
+  audit deny /root/** rwlkx,
+
+  # Deny execution in /tmp
+  audit deny /tmp/** x,
+}
