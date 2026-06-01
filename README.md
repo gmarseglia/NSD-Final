@@ -4,7 +4,7 @@
 
 ## Basic networking
 
-![Base networking - R101](images/basic.png)
+![Base networking - R101](images/Basic.png)
 
 ### R101
 
@@ -111,7 +111,7 @@ ip route add default via 192.168.1.1
 
 ## OpenVPN
 
-![OpenVPN](images/openvpn.png)
+![OpenVPN](images/OpenVPN.png)
 
 ### PKI and certificates
 
@@ -249,7 +249,7 @@ key  /root/openvpn/client1/client1.key
 
 ## 802.1x Authentication
 
-![RADIUS](images/radius.png)
+![RADIUS](images/RADIUS.png)
 
 ### RADIUS server
 
