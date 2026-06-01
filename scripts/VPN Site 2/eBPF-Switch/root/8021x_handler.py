@@ -4,8 +4,7 @@ import re
 import subprocess
 import sys
 
-CONFIG_FILE = "fwd_table.json"
-
+CONFIG_FILE = "/root/fwd_table.json"
 
 def is_valid_mac(mac):
     """Check if the given string is a valid MAC address."""
@@ -20,7 +19,7 @@ def load_config():
     try:
         with open(CONFIG_FILE, "r") as f:
             return json.load(f)
-    except FileNotFoundError:
+    except (FileNotFoundError, json.decoder.JSONDecodeError):
         return {"allowed_macs": []}
 
 
@@ -49,9 +48,10 @@ def run_cmd_and_return(command) -> str:
     return ""
 
 
-def get_physical_port(mac: str) -> str | None:
+def get_interface(mac: str) -> str | None:
     """Get the physical port associated with the given MAC address"""
     result = run_cmd_and_return(f"bridge fdb show | grep {mac}")
+    # Parse the result
     for line in result.splitlines():
         # The line format is usually: <mac> dev <interface> master bridge ...
         parts = line.split()
@@ -86,7 +86,7 @@ def handle_event(interface, event, mac=None):
     """Handle the event and update allowed_macs list"""
     config = load_config()
     if event in ("AP-STA-CONNECTED") and mac:
-        port = get_physical_port(mac)
+        port = get_interface(mac)
         vlan_id = get_vlan_id(mac)
         if mac not in config["allowed_macs"]:
             # Save config
@@ -105,14 +105,14 @@ def handle_event(interface, event, mac=None):
             config["allowed_macs"].remove(mac)
             save_config(config)
             # Run commands
-            port = get_physical_port(mac)
+            port = get_interface(mac)
             vlan_id = get_vlan_id(mac)
-            bytes = get_bytes(mac)
+            mac_bytes = get_bytes(mac)
             run_cmd(f"ebtables -D FORWARD -s {mac} -j ACCEPT")
             run_cmd(f"ebtables -D FORWARD -d {mac} -j ACCEPT")
             run_cmd(f"bridge vlan del dev {port} vid {vlan_id}")
             run_cmd(f"bridge vlan add dev {port} vid 1 pvid untagged")
-            run_cmd(f"bpftool map delete name radius_sessions key hex {bytes}")
+            run_cmd(f"bpftool map delete name radius_sessions key hex {mac_bytes}")
         print(f"{interface}: Denied traffic from {mac}")
     else:
         print(f"Unhadled event: {event}, ignoring...")
@@ -129,7 +129,7 @@ if __name__ == "__main__":
     )
     if mac and is_valid_mac(mac):
         print(
-            f", sys.argv[3]/mac: {mac}, port: {get_physical_port(mac)}, vlan_id: {get_vlan_id(mac)}, bytes: {get_bytes(mac)}",
+            f", sys.argv[3]/mac: {mac}, port: {get_interface(mac)}, vlan_id: {get_vlan_id(mac)}, bytes: {get_bytes(mac)}",
             end="",
         )
     print("")

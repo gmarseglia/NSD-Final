@@ -224,6 +224,9 @@ int xdp_parser_func(struct xdp_md *ctx) {
   if (ret != 0)
     goto out;
 
+  /* If attributes  CALLING_STATION_ID and TUNNEL_PRIVATE_GROUP_ID are found,
+   * then update the map
+   */
   bpf_map_update_elem(&radius_sessions, key, val, BPF_ANY);
 
 out:
