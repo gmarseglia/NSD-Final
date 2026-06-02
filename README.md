@@ -746,3 +746,110 @@ wpa_supplicant -c /etc/wpa_supplicant.conf -D wired -i eth0
 # wpa_cli -i eth0 logoff
 # wpa_cli -i eth0 logon
 ```
+
+## AppArmor
+
+![AppArmor](images/AppArmor.png)
+
+### Target program - ProFTPD
+
+The chosen program to be restricted via an AppArmor profile is `proftpd`, a commonly used FTP server.
+
+Although an FTP server natively lacks the capability to execute programs and enforces Linux user/group-based access control, its security heavily depends on its configuration. Misconfigurations can risk exposing the filesystem to unauthorized read and write access.
+
+In this particular example the configuration is the default one, with the addition of allowing `root` access. In order to do so:
+- The line `RootLogin on` was appended to `/etc/proftpd/proftpd.conf`.
+- The line `root` was commented out in `/etc/ftpusers`.
+
+### AppArmor profile
+
+#### `usr.sbin.proftpd`
+
+This AppArmor profile was built monitoring the execution of `proftpd` during normal usage with `aa-genprof /usr/sbin/proftd` and `aa-logprof`, and was later refined by hand. 
+
+1. Define normal usage explicit allow rules:
+```conf
+# Last Modified: Tue Jun  2 10:28:13 2026
+abi <abi/4.0>,
+
+include <tunables/global>
+
+/usr/sbin/proftpd {
+  include <abstractions/base>
+  include <abstractions/wutmp>
+
+  capability audit_write,
+  capability kill,
+  capability net_bind_service,
+  capability setgid,
+  capability setuid,
+
+  network netlink raw,
+  network inet dgram,
+  network inet stream,
+  network inet6 dgram,
+  network inet6 stream,
+
+  ...
+
+  /etc/group r,
+  /etc/hosts r,
+  /etc/login.defs r,
+  /etc/passwd r,
+  /etc/shells r,
+  /proc/sys/kernel/random/boot_id r,
+  /run/proftpd.* wk,
+  /run/systemd/userdb/ r,
+  /usr/sbin/proftpd mr,
+  /usr/sbin/unix_chkpwd Px,
+  /var/log/proftpd/* w,
+  owner /etc/ftpusers r,
+  owner /etc/host.conf r,
+  owner /etc/nsswitch.conf r,
+  owner /etc/pam.d/* r,
+  owner /etc/proftpd/* r,
+  owner /etc/proftpd/*/ r,
+  owner /etc/protocols r,
+  owner /etc/resolv.conf r,
+  owner /etc/services r,
+  owner /home/** rw,
+  owner /proc/*/loginuid r,
+  owner /run/proftpd.* rwk,
+  owner /run/test.sock w,
+
+}
+```
+- Lines like `capability net_bind_service`, `network ...`, `owner /etc/hosts r` enable the network operations expected by a FTP server.
+- Lines like `/etc/passwd r`, `/usr/sbin/unix_chkpwd Px`, `owner /etc/ftpusers r` enable the login operations expected by a FTP server which allows users to authenticate.
+- Lines like `owner /home/** rw` enable the file system operations expected by a FTP server.
+  - This particular line enable filesystem operation only in the directories and subdirectories in `/home`, respecting the Linux user/group-based access control.
+
+2. Define explicit deny rules:
+```conf
+# Last Modified: Tue Jun  2 10:28:13 2026
+abi <abi/4.0>,
+
+include <tunables/global>
+
+/usr/sbin/proftpd {
+  ...
+
+  audit deny /etc/** w,
+  audit deny /etc/shadow r,
+  audit deny /home/*/.ssh/ rwlkx,
+  audit deny /home/*/.ssh/** rwlkx,
+  audit deny /root/** rwlkx,
+  audit deny /root/.ssh/ rwlkx,
+  audit deny /root/.ssh/** rwlkx,
+  audit deny /tmp/** x,
+
+  ...
+}
+```
+- (1) deny reads of OS credential stores (e.g., `/etc/shadow`) $\rightarrow$ `audit deny /etc/shadow r`
+- (2) deny
+access to SSH private keys/sensitive user material $\rightarrow$ `audit deny /home/*/.ssh/ rwlkx`, `audit deny /home/*/.ssh/** rwlkx`, `audit deny /root/.ssh/ rwlkx`, `audit deny /root/.ssh/** rwlkx`
+- (3) deny writes to `/etc` (config
+integrity)* $\rightarrow$ `audit deny /etc/** w`
+- (4) deny execution from world-writable paths such as `/tmp` $\rightarrow$ `audit deny /tmp/** x`
+
