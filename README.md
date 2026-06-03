@@ -161,7 +161,7 @@ cp ${PKI}/dh.pem ${OPENVPN}/server
 The most important parts for OpenVPN configuration files (`server.conf`, `ccd/client1`, `ccd/client2`) used by the server OpenVPN daemon in server/hub @ CE3 are presented below.
 
 #### `server.conf`
-1. Indicate cryptographical material:
+1. Indicate cryptographic material:
 ```
 ca   /root/openvpn/server/ca.crt
 cert /root/openvpn/server/server.crt
@@ -242,7 +242,7 @@ The most important parts for OpenVPN configuration file (`client1.conf`) used by
 remote 10.1.3.2 1194
 ```
 
-2. Indicate cryptographical material:
+2. Indicate cryptographic material:
 ```
 ca   /root/openvpn/client1/ca.crt
 cert /root/openvpn/client1/client1.crt
@@ -291,7 +291,7 @@ clientb2	Cleartext-Password := "clientb2"
 			Tunnel-Private-Group-ID = 95,
 			Calling-Station-Id = "%{Calling-Station-Id}"
 ```
-- `Tunnel-Private-Groud-ID` indicates the vlanID that will be assigned to the user.
+- `Tunnel-Private-Group-ID` indicates the vlanID that will be assigned to the user.
 - `Calling-Station-Id = "%{Calling-Station-Id}"` allows to get the MAC address of user request in the server response $\rightarrow$ it's later used in the eBPF-Switch to associate `<MAC, interface, vlanID>`. 
 
 ### CE2 
@@ -853,3 +853,119 @@ access to SSH private keys/sensitive user material $\rightarrow$ `audit deny /ho
 integrity)* $\rightarrow$ `audit deny /etc/** w`
 - (4) deny execution from world-writable paths such as `/tmp` $\rightarrow$ `audit deny /tmp/** x`
 
+#### `init.sh`
+
+In the initial script the AppArmor profile is enforced and activated.
+
+1. Parse and enforce the AppArmor profile:
+```bash
+apparmor_parser -r /etc/apparmor.d/usr.sbin.proftpd
+aa-enforce /usr/sbin/proftpd
+```
+
+2. Reload the ProFTPD service to ensure it is restricted:
+```bash
+systemctl restart proftpd.service
+```
+
+3. Ensure the profile has been enabled in 'enforce' mode:
+```bash
+aa-status
+```
+
+#### `aa-status_report`
+
+The output of the `aa-status` command is saved in the `/root/report` directory of client-A1.
+
+The output of this command lists active profiles and monitored process.
+In particular, it shows:
+
+1. That the profile is in 'enforce mode':
+```
+apparmor module is loaded.
+106 profiles are loaded.
+7 profiles are in enforce mode.
+   ...
+   /usr/sbin/proftpd
+   ...
+23 profiles are in complain mode.
+   ...
+0 profiles are in prompt mode.
+0 profiles are in kill mode.
+76 profiles are in unconfined mode.
+```
+
+2. That the `proftd` process is in 'enforced mode':
+```
+1 processes have profiles defined.
+1 processes are in enforce mode.
+   /usr/sbin/proftpd (1115) 
+0 processes are in complain mode.
+0 processes are in prompt mode.
+0 processes are in kill mode.
+0 processes are unconfined but have a profile defined.
+0 processes are in mixed mode.
+```
+
+### Testing
+
+The reproducible test cases implemented to showcase the AppArmor profile in action are:
+1. User `alice` tries to download `/home/alice/secret.txt`.
+2. User `alice` tries to upload `/home/alice/secret.txt`.
+3. User `root` tries to download `/etc/shadow`.
+4. User `root` tries to upload to `/etc/malicious.conf`.
+5. User `alice` tries to download `/home/alice/.ssh/id_ed25519`.
+
+
+#### `test.sh` @ Client-B1
+
+From Client-B1 in order to run the test, the script `test.sh` has been created.
+
+```bash
+# 1. User `alice` tries to download `/home/alice/secret.txt`
+curl -u alice:alice -o $RX_DIR/secret.txt ftp://192.168.1.2//home/alice/secret.txt
+
+# 2. User `alice` tries to upload `/home/alice/secret.txt`
+curl -u alice:alice -T $TX_DIR/secret.txt ftp://192.168.1.2//home/alice/secret.txt
+
+# 3. User `root` tries to download `/etc/shadow`
+curl -u root:root -o $RX_DIR/shadow ftp://192.168.1.2//etc/shadow
+
+# 4. User `root` tries to upload to `/etc/malicious.conf`
+curl -u root:root -T $TX_DIR/malicious.conf ftp://192.168.1.2//etc/malicious.conf
+
+# 5. User `alice` tries to download `/home/alice/.ssh/id_ed25519`
+curl -u alice:alice -o $RX_DIR/id_ed25519 ftp://192.168.1.2//home/alice/.ssh/id_ed25519
+```
+
+| Command | Expected | No AppArmor | With AppArmor |
+| - | - | - | - |
+| 1. User `alice` tries to download `/home/alice/secret.txt` | Success | Success | Success |
+| 2. User `alice` tries to upload `/home/alice/secret.txt` | Success | Success | Success |
+| 3. User `root` tries to download `/etc/shadow` | Fail | Success | Fail |
+| 4. User `root` tries to upload to `/etc/malicious.conf` | Fail | Success | Fail |
+| 5. User `alice` tries to download `/home/alice/.ssh/id_ed25519` | Fail | Success | Fail |
+
+
+### Reporting
+
+Tt's possible to find the reports of `DENIED` actions from AppArmor in the output of `dmesg`.
+
+#### `dmesg_report`
+
+In particular, when executing the test suite with the AppArmor profile in 'enforce mode', the following audits can be found:
+
+1. Denied read of `/etc/shadow`, corresponding to test #3:
+```
+audit: type=1400 audit(1780491558.823:141): apparmor="DENIED" operation="open" class="file" profile="/usr/sbin/proftpd" name="/etc/shadow" pid=1588 comm="proftpd" requested_mask="r" denied_mask="r" fsuid=0 ouid=0
+```
+
+2. Denied creation of `/etc/malicious.conf`, corresponding to test #4:
+```
+audit: type=1400 audit(1780491559.299:142): apparmor="DENIED" operation="mknod" class="file" profile="/usr/sbin/proftpd" name="/etc/malicious.conf" pid=1592 comm="proftpd" requested_mask="c" denied_mask="c" fsuid=0 ouid=0
+```
+
+3. Denied read of `/home/alice/.ssh/id_ed25519`, corresponding to test #5:
+```
+audit: type=1400 audit(1780491559.783:143): apparmor="DENIED" operation="open" class="file" profile="/usr/sbin/proftpd" name="/home/alice/.ssh/id_ed25519" pid=1596 comm="proftpd" requested_mask="r" denied_mask="r" fsuid=1001 ouid=1001
+```

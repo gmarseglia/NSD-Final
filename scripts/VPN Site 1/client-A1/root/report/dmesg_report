@@ -1,0 +1,3 @@
+[Wed Jun  3 14:59:18 2026] audit: type=1400 audit(1780491558.823:141): apparmor="DENIED" operation="open" class="file" profile="/usr/sbin/proftpd" name="/etc/shadow" pid=1588 comm="proftpd" requested_mask="r" denied_mask="r" fsuid=0 ouid=0
+[Wed Jun  3 14:59:19 2026] audit: type=1400 audit(1780491559.299:142): apparmor="DENIED" operation="mknod" class="file" profile="/usr/sbin/proftpd" name="/etc/malicious.conf" pid=1592 comm="proftpd" requested_mask="c" denied_mask="c" fsuid=0 ouid=0
+[Wed Jun  3 14:59:19 2026] audit: type=1400 audit(1780491559.783:143): apparmor="DENIED" operation="open" class="file" profile="/usr/sbin/proftpd" name="/home/alice/.ssh/id_ed25519" pid=1596 comm="proftpd" requested_mask="r" denied_mask="r" fsuid=1001 ouid=1001
